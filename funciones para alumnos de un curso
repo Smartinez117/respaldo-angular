@@ -1,0 +1,22 @@
+  <h2>Alumnos de un Curso</h2>
+  <input type="number" #cursoId placeholder="Ingrese ID del Curso">
+  <button (click)="loadAlumnosPorCurso(+cursoId.value)">Cargar Alumnos del Curso</button>
+
+  <!-- Botón para mostrar el dropdown de alumnos del curso -->
+  <button class="dropbtn" (click)="isDropdownCursoOpen = !isDropdownCursoOpen">Ver Alumnos del Curso</button>
+
+  <div class="dropdown" *ngIf="isDropdownCursoOpen">
+    <ul>
+      <li *ngFor="let alumno of alumnosDelCurso"> <!-- Asegúrate de que esta variable contenga los alumnos del curso -->
+        {{ alumno.nombre }} ,ID: {{ alumno.id }} ,fecha_nacimiento: {{ alumno.fechaNacimiento | date:'short' }}
+        <ul class="cursos-alumno">
+          <li *ngFor="let curso of alumno.cursos" class="curso-alumno-item">
+            <span>ID Curso: {{ curso.id }}</span>
+            <span>Precio Curso: usd${{ curso.precio }}</span>
+            <span>Fecha Inicio: {{ curso.fechaInicio | date:'short' }}</span>
+            <span>Fecha Fin: {{ curso.fechaFin | date:'short' }}</span>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
